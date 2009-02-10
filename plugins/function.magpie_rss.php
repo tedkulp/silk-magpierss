@@ -25,9 +25,10 @@ function smarty_function_magpie_rss($params, &$smarty)
 {
 	$url = $params['url'];
 	$assign = $params['assign'];
+	$number_to_return = coalesce_key($params, 'number_to_return', -1);
 	
 	$rss_class = new SilkMagpierss();
-	$rss_class->parse_url($url, $assign);
+	$rss_class->parse_url($url, $assign, $number_to_return);
 }
 
 ?>

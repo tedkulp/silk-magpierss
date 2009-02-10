@@ -31,12 +31,17 @@ class SilkMagpierss extends SilkObject
 		require_once(join_path(dirname(dirname(__FILE__)), 'lib', 'rss_fetch.inc'));
 	}
 	
-	function parse_url($url, $smarty_var = '')
+	function parse_url($url, $smarty_var = '', $number_to_return = -1)
 	{
 		$rss = fetch_rss($url);
 		
 		if (!$rss)
 			return false;
+		
+		if ($number_to_return > 0 && $number_to_return < count($rss->items))
+		{
+			$rss->items = array_slice($rss->items, 0, $number_to_return);
+		}
 		
 		if ($smarty_var != '')
 		{
